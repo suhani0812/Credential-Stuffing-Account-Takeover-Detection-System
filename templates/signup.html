@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration | Join Network</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_style.css') }}">
+</head>
+<body class="auth-page" style="background: #f8f9fa;">
+    <div class="auth-card" style="border-top: 5px solid #28a745;">
+        <div style="font-size: 3rem;">✨</div>
+        <h2>Create Account</h2>
+        <p>Register once to access our partner network.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash-msg {% if category == 'success' %}msg-success{% else %}msg-danger{% endif %}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form action="/signup-process" method="POST">
+            <input type="email" name="u_email" placeholder="Choose Email ID" required class="input-field">
+            <input type="password" name="u_pass" placeholder="Set Secure Password" required class="input-field">
+            
+            <label style="font-size: 0.8rem; color: #666; display: block; text-align: left; margin-top: 10px;">Registering for:</label>
+            <select name="u_site" class="input-field">
+                <option value="1">SocialConnect</option>
+                <option value="2">Global Trust Bank</option>
+                <option value="3">SwiftCart Shopping</option>
+                <option value="4">EduPortal (MIT-WPU)</option>
+            </select>
+            
+            <button type="submit" class="btn-primary" style="background: #28a745;">Register Now</button>
+        </form>
+        
+        <a href="/" class="back-link">← Back to Login</a>
+    </div>
+</body>
+</html>

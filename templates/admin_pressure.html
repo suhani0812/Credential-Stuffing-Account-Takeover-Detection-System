@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Site Pressure | Police Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hub_style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>HUB-CORE</h2>
+        <a href="/admin-home" style="text-decoration:none;"><div class="nav-item">🏠 Home</div></a>
+        <div class="nav-item active">📈 Site Pressure</div>
+    </div>
+    <div class="dashboard-container">
+        <h1>Infrastructure Load Analysis</h1>
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px;">
+            <div class="data-table-container">
+                <img src="data:image/png;base64,{{ chart }}" style="width:100%;">
+            </div>
+            <div class="data-table-container">
+                <h3 style="color:var(--neon-yellow);">AI REPORT</h3>
+                <div class="ai-report-box">
+                    <p>{{ report }}</p>
+                    <p style="color:var(--neon-red); margin-top:10px;">{{ suggestion }}</p>
+                </div>
+                
+                <div style="margin-top:20px;">
+                    <form action="/action/tactical-trigger" method="POST">
+                        <button type="submit" name="action_type" value="MFA_ENABLED" class="status-tag tag-sus" style="width:100%; cursor:pointer; padding:10px; margin-bottom:10px;">Enable Site-Wide MFA</button>
+                    </form>
+                    <a href="/download/traffic-logs" style="text-decoration:none;">
+                        <div class="status-tag" style="text-align:center; padding:10px; border:1px solid var(--accent-blue); color:var(--accent-blue); cursor:pointer;">Download Forensic CSV</div>
+                    </a>
+                </div>
+
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <div class="ai-report-box" style="border-color:var(--neon-green); margin-top:20px;">
+                        {% for message in messages %}<p style="color:var(--neon-green);">✔️ {{ message }}</p>{% endfor %}
+                    </div>
+                  {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

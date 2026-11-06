@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global Trust Bank | Dashboard</title>
+    <style>
+        body { font-family: sans-serif; background: #e9ecef; margin: 0; display: flex; }
+        .sidebar { width: 220px; background: #002244; color: white; height: 100vh; padding: 20px; }
+        .sidebar a { display: block; color: #adb5bd; padding: 10px; text-decoration: none; margin-bottom: 5px; border-radius: 4px; }
+        .sidebar a:hover { background: #003366; color: white; }
+        .main { flex: 1; }
+        nav { background: white; padding: 15px 30px; display: flex; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .content { padding: 30px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .logout-btn { background: #dc3545; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>GTB Mobile</h3>
+        <a href="#" onclick="alert('Viewing Account Summary')">Summary</a>
+        <a href="#" onclick="alert('Loading Fund Transfer...')">Transfer Funds</a>
+        <a href="#" onclick="alert('Viewing e-Statements')">E-Statements</a>
+        <a href="#" onclick="alert('Security Settings Loaded')">Security</a>
+    </div>
+    <div class="main">
+        <nav>
+            <span style="font-weight: bold; color: #003366;">Welcome, {{ session['user_email'] }}</span>
+            <a href="/logout" class="logout-btn">Secure Logout</a>
+        </nav>
+        <div class="content">
+            <div class="stat-grid">
+                <div class="card"><h4>Balance</h4><h2>₹4,52,300</h2></div>
+                <div class="card"><h4>Investments</h4><h2>₹1,20,000</h2></div>
+                <div class="card"><h4>Rewards</h4><h2>1,250 pts</h2></div>
+            </div>
+            <div class="card" style="margin-top: 25px;">
+                <h3>Recent Activity</h3>
+                <button onclick="alert('Fetching details...')">View Full Statement</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

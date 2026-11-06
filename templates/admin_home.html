@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Police Intelligence Hub | Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hub_style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>HUB-CORE</h2>
+        <div style="font-size: 0.7rem; color: #475569; margin-bottom: 30px;">UNIT: PUNE_CYBER_FORENSICS</div>
+        <div class="nav-item">🏠 Dashboard Home</div>
+        <a href="/logout" style="text-decoration: none;"><div class="nav-item" style="color: var(--neon-red);">🔓 Secure Logout</div></a>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="header-row">
+            <h1>Intelligence Command Center</h1>
+            <div style="color: var(--neon-green);">● STATUS: ENFORCING</div>
+        </div>
+
+        <p style="color: var(--text-dim);">Welcome, Officer 007. Select a forensic module to begin investigation.</p>
+
+        <div class="hub-grid">
+            <a href="/intel/global" class="hub-card">
+                <div><div class="icon">🌍</div><h3>Global Intelligence</h3><p>Analyze geographic threat distribution and coordinate-based attack patterns.</p></div>
+            </a>
+            <a href="/intel/pressure" class="hub-card">
+                <div><div class="icon">📈</div><h3>Site Pressure</h3><p>Monitor real-time load and brute-force attempts across corporate endpoints.</p></div>
+            </a>
+            <a href="/intel/user-risk" class="hub-card">
+                <div><div class="icon">👤</div><h3>User Risk Analysis</h3><p>Detect lateral movement and identify compromised student credentials.</p></div>
+            </a>
+            <a href="/intel/reputation" class="hub-card">
+                <div><div class="icon">🛡️</div><h3>IP Reputation</h3><p>Investigate malicious proxies, VPNs, and blacklisted network nodes.</p></div>
+            </a>
+            <a href="/intel/audit" class="hub-card">
+                <div><div class="icon">📜</div><h3>System Audit Logs</h3><p>Full raw forensic trail of every packet and login attempt recorded.</p></div>
+            </a>
+            <a href="/intel/alerts" class="hub-card">
+                <div>
+                    <div class="icon">🚨</div><h3>Security Alerts</h3><p>Live flags from the Audit Engine identifying brute force and high-risk IPs.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

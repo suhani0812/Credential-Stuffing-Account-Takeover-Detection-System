@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Risk | Police Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hub_style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>HUB-CORE</h2>
+        <a href="/admin-home" style="text-decoration: none;"><div class="nav-item">🏠 Back to Home</div></a>
+        <div class="nav-item active" style="color: var(--accent-blue);">👤 User Risk</div>
+    </div>
+
+    <div class="dashboard-container">
+        <h1>Account Integrity Analysis</h1>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+            <div class="data-table-container">
+                <h3>Login Velocity (System-Wide)</h3>
+                <img src="data:image/png;base64,{{ chart }}" alt="Velocity Chart" style="width: 100%; border-radius: 8px;">
+            </div>
+
+            <div class="data-table-container">
+                <h3 style="color: var(--neon-yellow);">BEHAVIORAL AI INSIGHTS</h3>
+                <div class="ai-report-box">
+                    <p><strong>REPORT:</strong> {{ report }}</p>
+                    <p style="color: var(--neon-red);"><strong>SUGGESTION:</strong> {{ suggestion }}</p>
+                </div>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                      <div class="status-tag tag-sus" style="display:block; margin-bottom:10px; text-align:center;">{{ message }}</div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+
+        <div class="data-table-container">
+            <h3>High-Risk User Activity Trail</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User Email</th>
+                        <th>Site Access</th>
+                        <th>IP Source</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in sus_list %}
+                    <tr>
+                        <td>{{ log.EMail }}</td>
+                        <td>Site {{ log.SiteId }}</td>
+                        <td>{{ log.IPAddress }}</td>
+                        <td>
+                            {% if log.Status == 'frozen' %}
+                                <button class="status-tag btn-success-state" style="width:100%;">
+                                    ❄️ ACCOUNT FROZEN
+                                </button>
+                            {% else %}
+                                <form action="/action/freeze-user" method="POST">
+                                    <input type="hidden" name="user_id" value="{{ log.UserId }}">
+                                    <input type="hidden" name="email" value="{{ log.EMail }}">
+                                    <button type="submit" class="status-tag tag-danger" style="border:none; cursor:pointer; width:100%;">
+                                        FREEZE ACCOUNT
+                                    </button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global Intel | Police Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hub_style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>HUB-CORE</h2>
+        <a href="/admin-home" style="text-decoration: none;"><div class="nav-item">🏠 Back to Home</div></a>
+        <div class="nav-item active" style="color: var(--accent-blue);">🌍 Global Intel</div>
+    </div>
+
+    <div class="dashboard-container">
+        <h1>Geographic Threat Analysis</h1>
+        
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px;">
+            <div class="data-table-container">
+                <h3>Origin Distribution</h3>
+                <img src="data:image/png;base64,{{ chart }}" alt="Geographic Chart" style="width: 100%; border-radius: 8px;">
+            </div>
+
+            <div class="data-table-container">
+                <h3 style="color: var(--neon-yellow);">AI FORENSIC INSIGHTS</h3>
+                <div class="ai-report-box">
+                    <p><strong>REPORT:</strong> {{ report }}</p>
+                    <p style="color: var(--neon-red);"><strong>SUGGESTION:</strong> {{ suggestion }}</p>
+                </div>
+                <hr style="border: 0.5px solid #334155;">
+                <p style="font-size: 0.8rem; color: var(--text-dim);">
+                    Patterns analyzed based on last 500 login attempts. 
+                    Confidence Level: 94%
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

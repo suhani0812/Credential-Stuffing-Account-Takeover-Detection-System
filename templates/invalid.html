@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Failed | Police Hub</title>
+    <style>
+        body {
+            background: #0b0f19;
+            color: #f8fafc;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .warning-card {
+            background: #111827;
+            border: 2px solid #f59e0b;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.15);
+            max-width: 450px;
+        }
+        .icon { font-size: 50px; margin-bottom: 10px; }
+        h1 { color: #f59e0b; margin: 0; letter-spacing: 1px; }
+        p { color: #94a3b8; margin: 20px 0; }
+        .btn-retry {
+            display: inline-block;
+            background: #f59e0b;
+            color: #0b0f19;
+            padding: 10px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-retry:hover { background: #d97706; }
+    </style>
+</head>
+<body>
+    <div class="warning-card">
+        <div class="icon">⚠️</div>
+        <h1>AUTH FAILURE</h1>
+        <p>The system could not verify your identity. Repeated failed attempts may trigger a temporary IP lockout.</p>
+        <a href="/" class="btn-retry">Try Again</a>
+    </div>
+</body>
+</html>

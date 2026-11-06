@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IP Reputation | Police Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hub_style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>HUB-CORE</h2>
+        <a href="/admin-home" style="text-decoration: none;"><div class="nav-item">🏠 Back to Home</div></a>
+        <div class="nav-item active" style="color: var(--accent-blue);">🛡️ IP Reputation</div>
+    </div>
+
+    <div class="dashboard-container">
+        <h1>Network Node Investigation</h1>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+            <div class="data-table-container">
+                <h3 style="color: var(--neon-yellow);">NETWORK AI ANALYSIS</h3>
+                <div class="ai-report-box">
+                    <p><strong>THREAT LEVEL:</strong> CRITICAL</p>
+                    <p><strong>FINDING:</strong> Multiple connections detected via high-risk proxies and known botnet exit nodes.</p>
+                    <p style="color: var(--neon-red);"><strong>SUGGESTION:</strong> Update firewall rules to drop all packets from RepScore < 20.</p>
+                </div>
+                
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                      <div class="status-tag tag-sus" style="display:block; margin-bottom:10px; text-align:center;">{{ message }}</div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+            </div>
+
+            <div class="data-table-container">
+                <h3>IP Origin Map</h3>
+                <div style="text-align: center; padding: 20px;">
+                    <h1 style="font-size: 4rem; color: var(--neon-red); margin: 0;">12</h1>
+                    <p style="color: var(--text-dim);">Suspicious IPs active in last 60s</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-table-container">
+            <h3>Active Connections & Reputation Scores</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>IP Address</th>
+                        <th>Country</th>
+                        <th>Reputation Score</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for risk in risk_list %}
+                <tr>
+                    <td>{{ risk.IPAddress }}</td>
+                    <td>{{ risk.CountryCode }}</td>
+                    <td style="color: var(--neon-red);">{{ risk.RepScore }}/100</td>
+                    <td>
+                        {% if risk.IsBlacklisted == 1 %}
+                            <button class="status-tag btn-success-state" style="width:100%;">
+                                ✔️ IP BLACKLISTED
+                            </button>
+                        {% else %}
+                            <form action="/action/block-ip" method="POST">
+                                <input type="hidden" name="ip_address" value="{{ risk.IPAddress }}">
+                                <button type="submit" class="status-tag tag-danger" style="border:none; cursor:pointer; width:100%;">
+                                    BLACKLIST IP
+                                </button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

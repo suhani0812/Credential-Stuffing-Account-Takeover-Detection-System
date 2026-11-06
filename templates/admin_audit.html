@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Audit Logs | Police Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hub_style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>HUB-CORE</h2>
+        <a href="/admin-home" style="text-decoration: none;"><div class="nav-item">🏠 Back to Home</div></a>
+        <div class="nav-item active" style="color: var(--accent-blue);">📜 Raw Audit Logs</div>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="header-row">
+            <h1>Master Forensic Audit Trail</h1>
+            <button onclick="window.print()" class="status-tag" style="background:var(--accent-blue); color:white; border:none; cursor:pointer;">EXPORT AS PDF</button>
+        </div>
+        
+        <div class="data-table-container">
+            <p style="color: var(--text-dim); font-size: 0.8rem; margin-bottom: 20px;">
+                NOTE: These logs are cryptographically signed and immutable.
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Attempt ID</th>
+                        <th>User Email</th>
+                        <th>IP Address</th>
+                        <th>Site</th>
+                        <th>Status</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td style="color: var(--accent-blue);">#{{ log.AttemptId }}</td>
+                        <td>{{ log.EMail }}</td>
+                        <td>{{ log.IPAddress }}</td>
+                        <td>{{ log.site }}</td>
+                        <td>
+                            {% if log.status == 1 %}
+                            <span style="color: var(--neon-green);">SUCCESS</span>
+                            {% else %}
+                            <span style="color: var(--neon-red);">FAILED</span>
+                            {% endif %}
+                        </td>
+                        <td style="font-family: monospace;">{{ log.CreatedAt }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

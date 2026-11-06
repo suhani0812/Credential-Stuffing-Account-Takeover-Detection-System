@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Alerts | Police Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hub_style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>HUB-CORE</h2>
+        <a href="/admin-home" style="text-decoration: none;"><div class="nav-item">🏠 Back to Home</div></a>
+        <div class="nav-item active" style="color: var(--neon-red);">🚨 Security Alerts</div>
+    </div>
+
+    <div class="dashboard-container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Forensic Threat Intelligence</h1>
+            <span class="status-tag tag-danger" style="animation: pulse 2s infinite;">LIVE MONITORING ACTIVE</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+            <div class="data-table-container">
+                <h3 style="color: var(--neon-yellow);">AUDIT ENGINE ANALYSIS</h3>
+                <div class="ai-report-box">
+                    <p><strong>STATUS:</strong> SCANNING LOGS</p>
+                    <p><strong>CURRENT TASK:</strong> Evaluating login attempt velocity against defined detection rules.</p>
+                    <p style="color: var(--neon-blue);"><strong>LOGIC:</strong> Procedures are running cursors to identify Brute Force and Site Probing patterns.</p>
+                </div>
+            </div>
+
+            <div class="data-table-container">
+                <h3>Active Threats</h3>
+                <div style="text-align: center; padding: 20px;">
+                    <h1 style="font-size: 4rem; color: var(--neon-red); margin: 0;">{{ alerts|length }}</h1>
+                    <p style="color: var(--text-dim);">Suspicious patterns flagged in current window</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-table-container">
+            <h3>Flagged Suspicious Activity (SusAct)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rule Name</th>
+                        <th>Source IP</th>
+                        <th>Attempts</th>
+                        <th>Risk Level</th>
+                        <th>Action Taken</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if alerts %}
+                    {% for alert in alerts %}
+                    <tr>
+                        <td style="font-family: monospace; color: var(--accent-blue);">{{ alert.RuleName }}</td>
+                        <td>{{ alert.IPAddress }}</td>
+                        <td>{{ alert.TotalAttempts }}</td>
+                        <td>
+                            <span class="status-tag {% if alert.SecurityLevel == 'Critical' %}tag-danger{% else %}tag-sus{% endif %}">
+                                {{ alert.SecurityLevel }}
+                            </span>
+                        </td>
+                        <td style="font-style: italic; color: var(--text-dim);">{{ alert.ActionTaken }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 40px; color: var(--text-dim);">
+                            <div style="font-size: 2rem;">🔍</div>
+                            No suspicious activity detected by the current audit sweep.
+                        </td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <style>
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</body>
+</html>

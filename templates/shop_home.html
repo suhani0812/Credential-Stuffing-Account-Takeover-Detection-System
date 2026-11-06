@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SwiftCart | My Account</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f3f3f3; margin: 0; }
+        .navbar { background: #232f3e; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .container { max-width: 1000px; margin: 30px auto; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .order-item { border-bottom: 1px solid #eee; padding: 10px 0; display: flex; justify-content: space-between; }
+        .logout { color: #ff9900; text-decoration: none; font-weight: bold; border: 1px solid #ff9900; padding: 5px 15px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h2>📦 SwiftCart.in</h2>
+        <div>
+            <span>Hello, {{ session['user_email'].split('@')[0] }} | </span>
+            <a href="/logout" class="logout">Sign Out</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <h3>Your Recent Orders</h3>
+            <div class="order-item"><span>Mechanical Keyboard - Wireless</span> <strong>₹2,499</strong></div>
+            <div class="order-item"><span>Python Programming Manual</span> <strong>₹850</strong></div>
+            <div class="order-item"><span>USB-C Fast Charger</span> <strong>₹1,200</strong></div>
+        </div>
+        <div class="card" style="background: #fff9e6; border: 1px solid #f5d7bb;">
+            <h3>Prime Member Benefits</h3>
+            <p>You are saving <strong>₹150</strong> on delivery today!</p>
+            <button style="width: 100%; background: #ffd814; border: 1px solid #fcd200; padding: 10px; border-radius: 20px; cursor: pointer;">Manage Membership</button>
+        </div>
+    </div>
+</body>
+</html>
